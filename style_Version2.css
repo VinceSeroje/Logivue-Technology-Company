@@ -1,0 +1,502 @@
+/* ========================================= */
+/* 🌈 Root Variables: Color Palette & Theme  */
+/* ========================================= */
+:root {
+  --main-bg: #23272f;
+  --card-bg: #292d36;
+  --accent: #6c7a89;
+  --light: #f5f6fa;
+  --primary: #a7adba;
+  --secondary: #cfd2da;
+  --highlight: #ffb347;
+}
+
+/* ========================================= */
+/* 🧱 Base Styles: HTML & Body               */
+/* ========================================= */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0%;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  background: linear-gradient(135deg, #23272f 0%, #434857 100%);
+  background-size: 400% 400%;
+  animation: gradientBG 16s ease-in-out infinite;
+  color: var(--secondary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* 🔄 Background Animation */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ========================================= */
+/* 🧭 Navigation Bar                         */
+/* ========================================= */
+nav {
+  background: rgba(41, 45, 54, 0.98);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  justify-content: space-between;
+}
+
+nav .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 0.5rem 2rem;
+  position: relative;
+}
+
+/* 🔗 Logo Styling */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.logo-img {
+  height: 44px;
+  width: 44px;
+  border-radius: 100%;
+  object-fit: contain;
+  background: #fff;
+  padding: 3px;
+  box-shadow: 0 2px 8px 0 rgba(30, 34, 44, 0.13);
+}
+
+.logo-text {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--highlight);
+  letter-spacing: 2px;
+}
+
+/* 🔗 Navigation Links */
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: var(--secondary);
+  font-weight: 500;
+  transition: color 0.2s;
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+
+.nav-links li a.active,
+.nav-links li a:hover,
+.nav-links li a:focus {
+  background: var(--highlight);
+  color: #23272f;
+}
+
+/* 🍔 Hamburger Menu (Mobile Only) */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  z-index: 20;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  margin-left: 1rem;
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+  display: block;
+  width: 32px;
+  height: 3px;
+  background: var(--highlight);
+  border-radius: 2px;
+  position: relative;
+  transition: all 0.3s;
+}
+
+.hamburger::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 0;
+}
+
+.hamburger::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 0;
+}
+
+/* ========================================= */
+/* 📱 Mobile Navigation                      */
+/* ========================================= */
+@media (max-width: 900px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: flex-end;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--card-bg);
+    min-width: 180px;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 8px 32px 0 rgba(30, 34, 44, 0.18);
+    padding: 1rem 0.7rem;
+    animation: fadeDown 0.33s;
+    z-index: 15;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links li {
+    margin: 0.7rem 0;
+    width: 100%;
+    text-align: right;
+  }
+}
+
+/* 🔽 Dropdown Animation */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================================= */
+/* 🧩 Main Content & Sections                */
+/* ========================================= */
+main {
+  display: block;
+  width: 100%;
+  padding-bottom: 80px;
+}
+
+.section {
+  scroll-margin-top: 80px;
+  text-align: center;
+  background: var(--card-bg);
+  border-radius: 18px;
+  box-shadow: 0 4px 32px 0 rgba(30, 34, 44, 0.15);
+  margin: 2.5rem auto;
+  max-width: 700px;
+  width: 90vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 17% 20%;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s cubic-bezier(0.23, 1, 0.32, 1), transform 0.9s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* 👀 Scroll-In Visibility */
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 📱 Section Responsive Adjustments */
+@media (max-width: 600px) {
+  .section {
+    scroll-margin-top: 110px;
+    max-width: 98vw;
+    padding: 1.2rem 0.5rem;
+    margin: 1.1rem auto;
+  }
+}
+
+/* 📝 Section Headings */
+.section h1 {
+  color: var(--highlight);
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+.section h2,
+.section h3,
+.section h4 {
+  color: var(--light);
+  margin-bottom: 0.7em;
+  letter-spacing: 1px;
+}
+
+.section span {
+  color: var(--highlight);
+}
+
+/* 🎯 Hero Section */
+.hero {
+  background: linear-gradient(120deg, #292d36 80%, #434857 100%);
+  margin-top: 2rem;
+  box-shadow: 0 8px 40px 0 rgba(41, 45, 54, 0.19);
+}
+
+.hero .content {
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+/* ========================================= */
+/* 🧠 Mission & Vision Layout                */
+/* ========================================= */
+.mission-vision {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media (min-width: 600px) {
+  .mission-vision {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 4rem;
+  }
+}
+
+/* ========================================= */
+/* 👥 Team Section Layout                    */
+/* ========================================= */
+.team-hierarchy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.2rem;
+}
+
+.team-row {
+  display: flex;
+  justify-content: center;
+  gap: 15.5rem;
+  margin: 0.7rem 0;
+}
+
+.team-row.center {
+  justify-content: center;
+}
+
+/* 🧑‍💼 Team Member Card */
+.member {
+  background: rgba(41, 45, 54, 0.7);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px 0 rgba(30, 34, 44, 0.07);
+  padding: 1.3rem 7.2rem 1rem 7.2rem;
+  max-width: 190px;
+  text-align: center;
+  transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.member:hover {
+  transform: scale(1.06) translateY(-4px);
+  box-shadow: 0 4px 24px 0 rgba(255, 179, 71, 0.09);
+}
+
+/* 👤 Team Member Image Styling */
+.member img {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-bottom: 0.7rem;
+  border: 3px solid var(--highlight);
+}
+
+/* 🧾 Team Member Text */
+.member h4 {
+  color: var(--highlight);
+  font-size: 1.1rem;
+  margin: 0.3rem 0 0.2rem 0;
+}
+
+.member p {
+  color: var(--primary);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* 📱 Responsive Team Layout */
+@media (max-width: 900px) {
+  .team-row {
+    gap: 1.4rem;
+  }
+
+  .member {
+    max-width: 140px;
+  }
+
+  .member img {
+    width: 65px;
+    height: 65px;
+  }
+}
+
+@media (max-width: 600px) {
+  .team-hierarchy {
+    gap: 1.1rem;
+  }
+
+  .team-row {
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .member {
+    max-width: 100vw;
+  }
+
+  .member img {
+    width: 54px;
+    height: 54px;
+  }
+}
+
+/* ========================================= */
+/* 🧪 Project Section                        */
+/* ========================================= */
+.projects {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+/* 📦 Project Card Styling */
+.project-card {
+  background: rgba(60, 64, 75, 0.82);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px 0 rgba(255, 179, 71, 0.07);
+  padding: 7% 9%;
+  transition: box-shadow 0.15s;
+}
+
+.project-card:hover {
+  box-shadow: 0 6px 32px 0 rgba(255, 197, 71, 0.13);
+}
+
+.project-card h4 {
+  color: var(--highlight);
+  margin-bottom: 0.4rem;
+}
+
+/* ========================================= */
+/* 📞 Contact Section                        */
+/* ========================================= */
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+/* 🔗 Contact Item Styling */
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  text-decoration: none;
+  background: rgba(41, 45, 54, 0.7);
+  padding: 1rem 1.6rem;
+  border-radius: 10px;
+  transition: background 0.25s ease, transform 0.25s ease;
+  color: var(--light);
+  font-weight: 500;
+  font-size: 90%;
+  line-height: 1.2;
+}
+
+.contact-item:hover {
+  background: var(--highlight);
+  color: #23272f;
+  transform: translateY(-2px);
+}
+
+/* 🖼️ Contact Icon Styling */
+.contact-icon {
+  width: 20%;
+  height: 16%;
+  object-fit: contain;
+}
+
+/* ========================================= */
+/* 🧱 Footer Styling                         */
+/* ========================================= */
+footer {
+  background: #23272f;
+  color: var(--primary);
+  text-align: center;
+  padding: 1.3rem 0;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  z-index: 5;
+  box-shadow: 0 -2px 24px 0 rgba(30, 34, 44, 0.13);
+}
+
+/* ========================================= */
+/* 📱 Global Responsive Adjustments          */
+/* ========================================= */
+@media (max-width: 900px) {
+  .section {
+    width: 97vw;
+    padding: 1.7rem 0.5rem;
+  }
+
+  nav .container {
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 0.8rem 0.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  main {
+    padding-bottom: 110px;
+  }
+
+  nav ul {
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    justify-content: center;
+  }
+
+  .section {
+    margin: 1.1rem 0;
+    padding: 1rem 0.3rem;
+  }
+
+  footer {
+    font-size: 0.95rem;
+  }
+}
